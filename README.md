@@ -96,3 +96,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Note
+
+.env includes both split Postgres credentials (used by the postgres service in docker-compose.yml) and an assembled DATABASE_URL (used directly by the NestJS app / Prisma). Keep them in sync if you change your local password or DB name.

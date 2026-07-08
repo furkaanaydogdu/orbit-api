@@ -17,7 +17,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "dev": "docker compose up -d postgres redis && npm run wait-for-db && npm run start:dev",
+    "wait-for-db": "docker compose exec postgres pg_isready -U postgres -t 30",
+    "dev:stop": "docker compose stop postgres redis",
+    "dev:reset": "docker compose down -v && docker compose up -d postgres redis && npm run wait-for-db && npx prisma migrate dev --name init && npx prisma generate",
+    "dev:migrate": "npx prisma migrate dev --name init && npx prisma generate"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
