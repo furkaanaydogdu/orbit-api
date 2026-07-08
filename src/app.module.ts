@@ -9,6 +9,8 @@ import { PaymentsModule } from './payments/payments.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database/database.module';
+import { PrismaService } from './prisma/prisma.service';
 import Joi from 'joi';
 
 @Module({
@@ -22,13 +24,12 @@ import Joi from 'joi';
     NotificationsModule,
     ConfigModule.forRoot({
       isGlobal: true, // available everywhere without re-importing
-      validationSchema: Joi.object({
-
-      }),
+      validationSchema: Joi.object({}),
       envFilePath: '.env',
     }),
+    DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
