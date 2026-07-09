@@ -18,10 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "dev": "docker compose up -d postgres redis && npm run wait-for-db && npm run start:dev",
-    "wait-for-db": "docker compose exec postgres pg_isready -U postgres -t 30",
+    "dev": "docker compose up -d --wait postgres redis && npm run start:dev",
     "dev:stop": "docker compose stop postgres redis",
-    "dev:reset": "docker compose down -v && docker compose up -d postgres redis && npm run wait-for-db && npx prisma migrate dev --name init && npx prisma generate",
+    "dev:reset": "docker compose down -v && docker compose up -d --wait postgres redis && npx prisma migrate dev --name init && npx prisma generate",
     "dev:migrate": "npx prisma migrate dev --name init && npx prisma generate"
   },
   "dependencies": {
@@ -29,6 +28,7 @@
     "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "joi": "^18.2.3",
     "reflect-metadata": "^0.2.2",
@@ -57,7 +57,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.7.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.20.0"
   },
   "jest": {
