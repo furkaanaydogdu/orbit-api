@@ -23,6 +23,9 @@
     "dev:reset": "docker compose down -v && docker compose up -d --wait postgres redis && npm run dev:migrate",
     "dev:migrate": "npx prisma migrate dev --name init && npx prisma db seed && npx prisma generate"
   },
+  "overrides": {
+    "@hono/node-server": "^1.19.13"
+  },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.4",
