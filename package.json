@@ -21,7 +21,7 @@
     "dev": "docker compose up -d --wait postgres redis && npm run start:dev",
     "dev:stop": "docker compose stop postgres redis",
     "dev:reset": "docker compose down -v && docker compose up -d --wait postgres redis && npm run dev:migrate",
-    "dev:migrate": "npx prisma migrate dev --name init && npx prisma db seed && npx prisma generate"
+    "dev:migrate": "npx prisma migrate dev --name init && npx prisma generate && npx prisma db seed"
   },
   "overrides": {
     "@hono/node-server": "^1.19.13"
@@ -75,6 +75,9 @@
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
